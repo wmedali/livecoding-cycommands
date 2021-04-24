@@ -8,9 +8,18 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+       
+      - name: Cache node modules
+        uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Verify installation
         run: npx cypress verify
@@ -23,7 +32,7 @@ jobs:
         with:
           name: screenshots
           path: cypress/screenshots
-          if: ${{ failure() }}
+          if: failure()
 
       - name: Save videos - Always
         uses: actions/upload-artifact@master
