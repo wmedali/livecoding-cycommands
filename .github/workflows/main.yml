@@ -29,7 +29,7 @@ jobs:
         # print Cypress and OS info
         run: |
           npm ci
-          n./node_modules/.bin/cypress verify
+          ./node_modules/.bin/cypress verify
           ./node_modules/.bin/cypress info
           ./node_modules/.bin/cypress version
 
