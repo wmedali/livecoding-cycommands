@@ -17,4 +17,4 @@ jobs:
         run: npx cypress verify
 
       - name: Run Cypress Tests
-        run: npx cypress run --config baseUrl=${{ env.BASE_URL }}
+        run: npx cypress run --config baseUrl=${{ secrets.BASE_URL }}
