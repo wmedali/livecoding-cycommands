@@ -18,3 +18,16 @@ jobs:
 
       - name: Run Cypress Tests
         run: npx cypress run --config baseUrl=${{ secrets.BASE_URL }}
+
+      - name: Save Screenshots - On failure
+        uses: actions/upload-artifact@master
+        with:
+          name: screenshots
+          path: cypress/screenshots
+          if: failure()
+
+      - name: Save videos - Always
+        uses: actions/upload-artifact@master
+        with:
+          name: videos
+          path: cypress/videos
