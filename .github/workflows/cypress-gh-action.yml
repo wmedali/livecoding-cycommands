@@ -1,4 +1,4 @@
-name: End-to-end tests
+name: Run tests using Cypress Github Action
 on: [push]
 jobs:
   cypress-run:
