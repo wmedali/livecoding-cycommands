@@ -29,25 +29,20 @@ jobs:
         # print Cypress and OS info
         run: |
           npm ci
-          npx cypress verify
-          npx cypress info
-          npx cypress version
-          npx cypress version --component package
-          npx cypress version --component binary
-          npx cypress version --component electron
-          npx cypress version --component node
-
-      - name: Verify installation
-        run: npx cypress verify
+          n./node_modules/.bin/cypress verify
+          ./node_modules/.bin/cypress info
+          ./node_modules/.bin/cypress version
 
       - name: Run Cypress Tests
-        run: npx cypress run --config baseUrl=${{ secrets.BASE_URL }}
+        run: ./node_modules/.bin/cypress run --config baseUrl=${{ secrets.BASE_URL }}
 
-      - name: Save Screenshots - On failure
+      - name: Save screenshots and videos - On Failure Only
         uses: actions/upload-artifact@master
         with:
           name: screenshots
-          path: cypress/screenshots
+          path:  |
+            cypress/screenshots
+            cypress/videos
           if: failure()
 
       #- name: Save videos - Always
