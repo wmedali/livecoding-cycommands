@@ -50,8 +50,8 @@ jobs:
           path: cypress/screenshots
           if: failure()
 
-      - name: Save videos - Always
-        uses: actions/upload-artifact@master
-        with:
-          name: videos
-          path: cypress/videos
+      #- name: Save videos - Always
+      #  uses: actions/upload-artifact@master
+      #  with:
+      #    name: videos
+      #    path: cypress/videos
