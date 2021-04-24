@@ -1,0 +1,52 @@
+name: Run Cypress Tests
+
+on: [push]
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+       
+      - name: Cache node modules
+        uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Cache Cypress binary
+        uses: actions/cache@v1
+        with:
+          path: ~/.cache/Cypress
+          key: cypress-${{ runner.os }}-cypress-${{ hashFiles('**/package.json') }}
+          restore-keys: |
+            cypress-${{ runner.os }}-cypress-
+
+      - name: Install dependencies and verify cypress
+        # print Cypress and OS info
+        run: |
+          npm ci
+          ./node_modules/.bin/cypress verify
+          ./node_modules/.bin/cypress info
+          ./node_modules/.bin/cypress version
+
+      - name: Run Cypress Tests
+        run: ./node_modules/.bin/cypress run --config baseUrl=${{ secrets.BASE_URL }}
+
+      - name: Save screenshots and videos - On Failure Only
+        uses: actions/upload-artifact@master
+        with:
+          name: screenshots
+          path:  |
+            cypress/screenshots
+            cypress/videos
+          if: failure()
+
+      #- name: Save videos - Always
+      #  uses: actions/upload-artifact@master
+      #  with:
+      #    name: videos
+      #    path: cypress/videos
