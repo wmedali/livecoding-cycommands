@@ -43,7 +43,7 @@ jobs:
           path:  |
             cypress/screenshots
             cypress/videos
-          if: failure()
+          if-no-files-found: ignore
 
       #- name: Save videos - Always
       #  uses: actions/upload-artifact@master
