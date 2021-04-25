@@ -1,7 +1,7 @@
 name: Run tests using Cypress Github Action
 on: [push]
 jobs:
-  cypress-run:
+  cypress-run-record:
     runs-on: ubuntu-16.04
     steps:
       - name: Checkout
