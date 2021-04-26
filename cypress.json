@@ -1,5 +1,5 @@
 {
-    "videoUploadOnPasses" : false,
     "projectId": "8yc4rg",
-    "screenshotsFolder" : "testsLoging/screenshots"
+    "screenshotsFolder" : "testsLoging/screenshots",
+    "videoUploadOnPasses" : false
 }
